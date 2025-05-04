@@ -1,19 +1,22 @@
-project_entry = controller.go
+project_entry = ./src
+project_controller = ./controller
 project_handlers = ./handlers
 project_helpers = ./helpers
 project_services = ./services
 
-go_to_project = cd src
+go_to_project = cd $(project_entry)
 
 default: tidy start
 
 tidy: 
-	$(go_to_project) && go mod tidy
+	go mod tidy
 
 start:
-	$(go_to_project) && go run $(project_entry)
+	$(go_to_project) && go run $(project_controller)
 
 test:
-	$(go_to_project) && go test -timeout 30s $(project_handlers)
-	$(go_to_project) && go test -timeout 30s $(project_helpers)
-	$(go_to_project) && go test -timeout 30s $(project_services)
+	echo "Running unit tests"
+	docker compose run -T \
+		--rm \
+		golang \
+		bash scripts/unit-test.sh $(project_handlers) $(project_helpers) $(project_services)
