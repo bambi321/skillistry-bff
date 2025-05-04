@@ -3,15 +3,17 @@ project_handlers = ./handlers
 project_helpers = ./helpers
 project_services = ./services
 
+go_to_project = cd src
+
 default: tidy start
 
-tidy:
-	go mod tidy
+tidy: 
+	$(go_to_project) && go mod tidy
 
 start:
-	go run $(project_entry)
+	$(go_to_project) && go run $(project_entry)
 
 test:
-	go test -timeout 30s $(project_handlers)
-	go test -timeout 30s $(project_helpers)
-	go test -timeout 30s $(project_services)
+	$(go_to_project) && go test -timeout 30s $(project_handlers)
+	$(go_to_project) && go test -timeout 30s $(project_helpers)
+	$(go_to_project) && go test -timeout 30s $(project_services)

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  go:
+    image: golang@sha256:30baaea08c5d1e858329c50f29fe381e9b7d7bced11a0f5f1f69a1504cdfbf5e
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/go/src/app # Mount your project directory into the container
+    working_dir: /go/src/app
+    command: go run . # Or the specific command to run your Go application
