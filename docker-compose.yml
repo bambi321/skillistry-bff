@@ -4,3 +4,12 @@ services:
     volumes:
       - .:/code
     working_dir: /code
+
+  skillistry-bff:
+    build:
+      context: ./src
+      dockerfile: ./docker/dockerfile
+      args:
+         - project_controller=controller.go
+    ports: 
+      - "8080:8080"

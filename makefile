@@ -14,6 +14,10 @@ tidy:
 start:
 	$(go_to_project) && go run $(project_controller)
 
+start-v2:
+	echo "Spinning up API"
+	docker compose up --build skillistry-bff
+
 test:
 	echo "Running unit tests"
 	docker compose run -T \
